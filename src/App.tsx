@@ -112,7 +112,7 @@ function App() {
 
         {/* INDEPENDENT SCROLL AREA */}
         <div
-          className="flex-1 overflow-y-auto scrollbar-thin px-6 md:px-12 pt-16 pb-24"
+          className="flex-1 overflow-y-auto no-scrollbar px-6 md:px-12 pt-16 pb-24"
           id="chat-scroll-container"
         >
           <div className="w-full max-w-2xl mx-auto flex flex-col">

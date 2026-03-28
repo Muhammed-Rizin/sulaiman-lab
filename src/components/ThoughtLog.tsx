@@ -138,17 +138,17 @@ const ThoughtLog: React.FC<ThoughtLogProps> = ({ steps, isWorking }) => {
       {/* TIMELINE CONTAINER */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto space-y-6 relative scrollbar-thin p-5 lg:p-6"
+        className="flex-1 overflow-y-auto space-y-6 relative no-scrollbar p-5 lg:p-6"
       >
         {/* Continuous Vertical Line */}
         {steps.length > 0 && (
-          <div className="absolute left-[34px] top-6 bottom-6 w-0.5 bg-[#E6E1D6]/50 z-0" />
+          <div className="absolute left-8.5 top-6 bottom-6 w-0.5 bg-[#E6E1D6]/50 z-0" />
         )}
 
         {steps.length === 0 && !isWorking && (
           <div className="flex flex-col items-center justify-center h-64 opacity-40 text-center">
              <Brain className="w-8 h-8 text-[#A09B8E] mb-4 stroke-1" />
-             <p className="text-[11px] text-[#A09B8E] font-medium italic max-w-[180px]">
+             <p className="text-[11px] text-[#A09B8E] font-medium italic max-w-45">
                Waiting for input to trace the reasoning workflow...
              </p>
           </div>
@@ -170,7 +170,7 @@ const ThoughtLog: React.FC<ThoughtLogProps> = ({ steps, isWorking }) => {
               <div className="flex gap-4">
                 {/* ICON NODE */}
                 <div
-                  className={`shrink-0 w-[28px] h-[28px] rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${
+                  className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${
                     isActive
                       ? "bg-[#D97757] border-[#D97757] shadow-[0_0_15px_rgba(217,119,87,0.3)] scale-110"
                       : isMilestone

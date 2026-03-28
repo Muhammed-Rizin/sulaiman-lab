@@ -35,7 +35,7 @@ const AgentResponse: React.FC<AgentResponseProps> = ({
       <div
         className={`group relative ${
           isUser
-            ? "max-w-[85%] bg-[#F0EBE0] rounded-2xl rounded-tr-sm px-6 py-4 border border-[#D9D4C7] shadow-sm hover:border-[#D97757]/20 transition-all"
+            ? "max-w-[85%] bg-white rounded-2xl rounded-tr-sm px-6 py-4 border border-[#E6E1D6] shadow-[0_2px_15px_-4px_rgba(0,0,0,0.06)] hover:border-[#D97757]/30 hover:shadow-md transition-all"
             : "w-full bg-white rounded-3xl px-2 py-2 md:px-4 md:py-4 transition-all"
         }`}
       >
@@ -52,7 +52,7 @@ const AgentResponse: React.FC<AgentResponseProps> = ({
       </div>
 
       {!isUser && (
-        <div className="mt-4 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E6E1D6]/30 to-transparent" />
+        <div className="mt-4 w-full h-px bg-linear-to-r from-transparent via-[#E6E1D6]/30 to-transparent" />
       )}
     </div>
   );
