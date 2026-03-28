@@ -4,12 +4,16 @@ import AgentControl from "./components/AgentControl";
 import ThoughtLog from "./components/ThoughtLog";
 import AgentResponse from "./components/AgentResponse";
 import JsonCodeBlock from "./components/JsonCodeBlock";
-import { Plus, Sparkles } from "lucide-react";
+import ApiKeyModal from "./components/ApiKeyModal";
+import { Plus, Settings, Terminal, MessageSquare } from "lucide-react";
+import { Toaster } from "react-hot-toast";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const { runAgent, clearSession, isWorking, steps, messages, rawContents } = useAgent();
   const [showRaw, setShowRaw] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(384); // Default w-96
+  const [sidebarWidth, setSidebarWidth] = useState(420); // Slightly wider sidebar
+  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const isResizing = useRef(false);
 
   const handleNewThread = () => {
@@ -51,42 +55,56 @@ function App() {
   }, [resize, stopResizing]);
 
   return (
-    <div className="h-screen overflow-hidden flex bg-[#F7F4EF] text-[#333333] selection:bg-[#D97757]/10">
+    <div className="h-screen overflow-hidden flex bg-[#FAF9F6] text-[#1A1A1A] font-sans selection:bg-[#D97757]/20">
+      <Toaster position="top-center" reverseOrder={false} />
+      
       {/* MAIN CHAT COLUMN */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#F7F4EF] relative">
+      <main className="flex-1 flex flex-col min-w-0 bg-[#FAF9F6] relative">
         {/* FIXED HEADER */}
-        <header className="h-16 w-full bg-[#F7F4EF]/80 backdrop-blur-md z-30 flex items-center justify-center border-b border-[#E6E1D6]/60 px-6 shrink-0">
+        <header className="h-16 w-full bg-[#FAF9F6]/90 backdrop-blur-md z-30 flex items-center justify-center border-b border-[#E6E1D6]/40 px-6 shrink-0 shadow-sm shadow-black/5">
           <div className="w-full max-w-2xl flex items-center justify-between">
-            <div className="flex items-center gap-3.5">
-              <div className="w-8 h-8 bg-[#D97757] rounded-[10px] flex items-center justify-center text-white shadow-lg shadow-[#D97757]/10">
-                <Sparkles className="w-4.5 h-4.5" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-[#333333] rounded-xl flex items-center justify-center overflow-hidden shadow-md shadow-black/5 ring-1 ring-black/5">
+                <img src="/src/assets/logo.png" alt="Logo" className="w-full h-full object-cover scale-110" />
               </div>
               <div>
-                <h1 className="font-serif text-base font-bold tracking-tight">Sulaiman Lab</h1>
-                <p className="text-[8px] text-[#A09B8E] uppercase tracking-[0.2em] font-bold opacity-70">
-                  Core Agent Engine
+                <h1 className="font-serif text-lg font-bold tracking-tight text-[#1A1A1A]">Sulaiman Lab</h1>
+                <p className="text-[9px] text-[#A09B8E] uppercase tracking-[0.2em] font-bold opacity-80 flex items-center gap-1.5">
+                  <span className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse"></span>
+                  Advanced Reasoning Core
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsApiKeyModalOpen(true)}
+                className="p-2 text-[#A09B8E] hover:text-[#333333] hover:bg-black/5 rounded-full transition-all cursor-pointer"
+                title="API Settings"
+              >
+                <Settings size={18} strokeWidth={2.5} />
+              </button>
+
+              <div className="w-px h-4 bg-[#E6E1D6]/60 mx-1" />
+
               <button
                 onClick={() => setShowRaw(!showRaw)}
-                className={`text-[9px] font-sans font-bold uppercase tracking-widest px-3 py-1.5 border rounded-full transition-all ${
+                className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest px-4 py-2 border rounded-full transition-all cursor-pointer ${
                   showRaw
-                    ? "bg-[#333333] border-[#333333] text-white"
-                    : "border-[#E6E1D6] text-[#A09B8E] hover:border-[#D97757]/30"
+                    ? "bg-[#333333] border-[#333333] text-white shadow-lg shadow-black/10"
+                    : "border-[#E6E1D6] text-[#A09B8E] hover:border-[#333333] hover:text-[#333333]"
                 }`}
               >
-                System Trace
+                <Terminal size={12} />
+                Raw Trace
               </button>
 
               <button
                 onClick={handleNewThread}
-                className="flex items-center gap-2 bg-white border border-[#E6E1D6] px-3.5 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest text-[#333333] hover:border-[#D97757]/50 hover:bg-[#F7F4EF] transition-all shadow-sm"
+                className="flex items-center gap-2 bg-white border border-[#E6E1D6] px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#333333] hover:border-[#D97757]/40 hover:bg-[#FAF9F6] transition-all shadow-sm active:scale-95 cursor-pointer"
               >
-                <Plus className="w-2.5 h-2.5 text-[#D97757]" />
-                New Thread
+                <Plus size={12} className="text-[#D97757]" strokeWidth={3} />
+                Thread
               </button>
             </div>
           </div>
@@ -94,25 +112,28 @@ function App() {
 
         {/* INDEPENDENT SCROLL AREA */}
         <div
-          className="overflow-y-auto scrollbar-thin px-6 md:px-12 pt-12 pb-12"
-          style={{ height: "calc(100vh - 128px)" }}
+          className="flex-1 overflow-y-auto scrollbar-thin px-6 md:px-12 pt-16 pb-24"
+          id="chat-scroll-container"
         >
           <div className="w-full max-w-2xl mx-auto flex flex-col">
             {messages.length === 0 && !isWorking && (
               <div className="mt-24 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
-                <h2 className="font-serif text-4xl md:text-5xl font-light mb-6 tracking-tight leading-tight">
+                <div className="w-16 h-16 bg-[#D97757]/10 rounded-[28px] flex items-center justify-center mx-auto mb-8 shadow-inner ring-1 ring-[#D97757]/20">
+                   <MessageSquare className="w-8 h-8 text-[#D97757]" strokeWidth={2} />
+                </div>
+                <h2 className="font-serif text-4xl md:text-5xl font-light mb-6 tracking-tight leading-tight text-[#1A1A1A]">
                   How can I help you <br />
                   <span className="italic text-[#D97757]">explore</span> today?
                 </h2>
-                <p className="text-[#A09B8E] max-w-sm mx-auto leading-relaxed font-sans text-sm">
-                  Interact with the agent and watch its reasoning path unfold in the sidebar.
-                  Perfect for learning agentic logic.
+                <p className="text-[#A09B8E] max-w-sm mx-auto leading-relaxed text-sm font-medium">
+                  Watch the agent's reasoning path unfold in real-time.
+                  Perfect for understanding complex agentic workflows.
                 </p>
               </div>
             )}
 
             {/* Conversation History */}
-            <div className="flex flex-col">
+            <div className="flex flex-col space-y-2">
               {messages.map((m, idx) => (
                 <AgentResponse
                   key={idx}
@@ -125,15 +146,25 @@ function App() {
 
             {/* SYSTEM DUMP VIEW (Toggleable) */}
             {showRaw && (
-              <div className="mt-6 mb-8 animate-in zoom-in-95 duration-500">
+              <div className="mt-8 mb-12 animate-in zoom-in-95 duration-500">
                 <JsonCodeBlock data={rawContents} label="Full System Content Trace" maxHeight="" />
               </div>
+            )}
+            
+            {/* Typing Indicator */}
+            {isWorking && messages.length > 0 && (
+               <div className="flex items-center gap-3 py-6 animate-pulse">
+                 <div className="w-2 h-2 bg-[#D97757] rounded-full animate-bounce" />
+                 <span className="text-xs text-[#A09B8E] font-medium uppercase tracking-widest italic">
+                   Reasoning...
+                 </span>
+               </div>
             )}
           </div>
         </div>
 
         {/* FIXED CONTROL BAR */}
-        <div className="min-h-16 bg-[#F7F4EF] border-t border-[#E6E1D6] flex items-center z-30 shrink-0 py-4">
+        <div className="sticky bottom-0 bg-[#FAF9F6]/80 backdrop-blur-md border-t border-[#E6E1D6]/40 flex items-center z-30 shrink-0 py-6 pb-10">
           <div className="w-full max-w-2xl mx-auto px-6">
             <AgentControl
               onRun={runAgent}
@@ -147,20 +178,29 @@ function App() {
       {/* RESIZE HANDLE */}
       <div
         onMouseDown={startResizing}
-        className="w-1 bg-[#E6E1D6]/20 hover:bg-[#D97757]/40 cursor-col-resize transition-colors z-40 active:bg-[#D97757]"
-      />
+        className="w-1 hover:w-1.5 bg-[#E6E1D6]/30 hover:bg-[#D97757]/40 cursor-col-resize transition-all z-40 active:bg-[#D97757] group relative"
+      >
+         <div className="absolute inset-y-0 -left-2 -right-2 cursor-col-resize z-0" />
+      </div>
 
       {/* REASONING SIDEBAR (ThoughtLog) */}
       <aside
         style={{ width: `${sidebarWidth}px` }}
-        className="hidden lg:flex flex-col font-sans shadow-[-20px_0_40px_-20px_rgba(0,0,0,0.02)] z-15 border-l border-[#E6E1D6] overflow-hidden shrink-0"
+        className="hidden lg:flex flex-col font-sans shadow-[-20px_0_60px_-20px_rgba(0,0,0,0.03)] z-15 border-l border-[#E6E1D6]/50 overflow-hidden shrink-0 bg-[#FBF9F4]"
       >
         <div className="flex-1 overflow-y-auto scrollbar-thin">
           <ThoughtLog steps={steps} isWorking={isWorking} />
         </div>
       </aside>
+
+      <AnimatePresence>
+        {isApiKeyModalOpen && (
+          <ApiKeyModal onClose={() => setIsApiKeyModalOpen(false)} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 export default App;
+

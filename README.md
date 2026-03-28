@@ -1,58 +1,51 @@
-# 🔬 Sulaiman Lab (Reasoning AI Engine)
+# 🧪 Sulaiman Lab: AI Agent Reasoning Chain
 
-A premium, educational "Reasoning Lab" designed to visualize the internal logic of AI agents. Built with **React 19**, **Vite**, and **Google Gemini SDK**, this project implements modern agentic patterns like **Chain-of-Thought (CoT)**, **Parallel Tool Execution**, and **Vercel React Best Practices**.
+A premium, transparent AI agent platform designed for deep reasoning and autonomous task execution. Built with React and powered by Google's Gemini models.
 
-![Sulaiman Lab Preview](https://github.com/user-attachments/assets/placeholder)
+![Agent Lab Dashboard](public/logo.png)
 
-## 🚀 Key Features
+## ✨ Features
 
-- **🧠 Autonomous Reasoning**: Watch the AI "think" before it acts, with detailed strategy and logic traces.
-- **🛠️ Parallel Tool Handoff**: Executes multiple tools (e.g., Weather + Search) concurrently using `Promise.all` to avoid waterfalls.
-- **🔬 System Trace**: Toggle a full JSON dump of the model's conversation history (`system`, `user`, `model`, `function` roles).
-- **🛡️ Security First**: Strict environment validation, loop guards, and robust error handling to prevent runaway API costs.
-- **⚛️ Premium UI**: Crafted with an Anthropic-inspired aesthetic, featuring earthy tones, glassmorphism, and a timeline-based reasoning sidebar.
+- 🧠 **Transparent Reasoning Trace**: Watch the agent's step-by-step logic in real-time.
+- 🛠️ **Developer Mode**: Toggle between user-friendly explanations and raw JSON/tool data.
+- 🔑 **Secure Key Management**: BYOK (Bring Your Own Key) stored safely in your browser's local storage.
+- ⚡ **Autonomous Tooling**: Proactive agentic loop that utilizes tools logically.
+- 💅 **Premium UI/UX**: Claude-inspired aesthetics, modern typography, and smooth transitions.
+- 📢 **Modern Notifications**: Beautiful status updates powered by `react-hot-toast`.
 
-## 🛠️ Stack
+## 🚀 Getting Started
 
-- **Core**: React 19, TypeScript
-- **Styling**: Tailwind CSS v4 (using `@layer components`)
-- **Intelligence**: Google Gemini-2.5-Flash (or Gemini-3-Flash-Preview)
+1. **Clone the Repo**:
+   ```bash
+   git clone https://github.com/Muhammed-Rizin/sulaiman-lab.git
+   cd sulaiman-lab
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure API Key**:
+   - Open the app and click the gear icon (Settings).
+   - Enter your **Gemini API Key**. Get one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+## 🛠️ Technology Stack
+
+- **Framework**: Vite + React
 - **Icons**: Lucide React
-- **Markdown**: React Markdown + Remark GFM
+- **Animations**: Framer Motion
+- **Styling**: Vanilla CSS + Tailwind-utility classes
+- **API**: Gemini AI Model (Flash 2.5)
 
-## 🏁 Quick Start
+## 🎨 Branding
 
-### 1. Prerequisites
+The "Sulaiman Lab" brand represents the laboratory of intelligence where agents are built and monitored with extreme transparency.
 
-- Node.js 18+
-- A Google Gemini API Key ([Get one here](https://aistudio.google.com/))
-
-### 2. Installation
-
-```bash
-git clone https://github.com/Muhammed-Rizin/sulaiman-lab.git
-cd sulaiman-lab
-npm install
-```
-
-### 3. Environment Variables
-
-Create a `.env.local` file in the root:
-
-```env
-VITE_GEMINI_KEY=your_gemini_api_key_here
-```
-
-### 4. Run Development Server
-
-```bash
-npm run dev
-```
-
-## 📖 Learning More
-
-Check out [LEARN.md](./LEARN.md) for a deep dive into how "Reasoning Agents" work and how to extend the tool definitions.
-
-## 📄 License
-
-MIT
+---
+Built by [Muhammed Rizin](https://github.com/Muhammed-Rizin).

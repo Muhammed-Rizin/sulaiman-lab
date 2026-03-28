@@ -72,15 +72,15 @@ export const useAgent = () => {
     setIsWorking(true);
     setSteps([]);
 
-    const API_KEY = import.meta.env.VITE_GEMINI_KEY;
+    const API_KEY = localStorage.getItem("gemini-api-key") || import.meta.env.VITE_GEMINI_KEY;
 
     if (!API_KEY) {
       addStep({
         turn: 0,
         type: "ERROR",
-        message: "⚠️ CONFIGURATION ERROR",
+        message: "⚠️ API KEY MISSING",
         description:
-          "VITE_GEMINI_KEY is missing from environment variables. Please check your .env.local file.",
+          "Please configure your Gemini API Key in the settings (gear icon) to enable autonomous reasoning.",
       });
       setIsWorking(false);
       return;
