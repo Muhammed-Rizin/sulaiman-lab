@@ -1,4 +1,4 @@
-# 🔬 Sulaiman AI Lab (Reasoning AI Engine)
+# 🔬 Sulaiman Lab (Reasoning AI Engine)
 
 A premium, educational "Reasoning Lab" designed to visualize the internal logic of AI agents. Built with **React 19**, **Vite**, and **Google Gemini SDK**, this project implements modern agentic patterns like **Chain-of-Thought (CoT)**, **Parallel Tool Execution**, and **Vercel React Best Practices**.
 
@@ -30,7 +30,7 @@ A premium, educational "Reasoning Lab" designed to visualize the internal logic 
 ### 2. Installation
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Muhammed-Rizin/sulaiman-lab.git
 cd sulaiman-lab
 npm install
 ```

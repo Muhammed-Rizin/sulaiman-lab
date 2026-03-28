@@ -1,6 +1,6 @@
-# 📖 Learn: Sulaiman AI Lab
+# 📖 Learn: Sulaiman Lab
 
-Welcome to **Sulaiman AI Lab**! This project is more than just a chat app—it's a workspace for understanding how autonomous AI agents solve complex problems.
+Welcome to the educational version of **Sulaiman Lab**! This project is designed to show you how "Reasoning Agents" work under the hood.
 
 ## 🔄 The Agentic Loop (Think-Act-Observe-Repeat)
 
@@ -40,4 +40,4 @@ You can extend the agent's capabilities in `src/lib/agent/tools.ts`:
 
 ---
 
-_Happy Learning with Sulaiman AI Lab!_
+_Happy Learning with Sulaiman Lab!_
