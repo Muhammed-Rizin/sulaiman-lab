@@ -1,7 +1,8 @@
 {
   "name": "sulaiman-lab",
+  "description": "A premium, educational Reasoning AI Engine built with React 19 and Google Gemini. Visualizes Chain-of-Thought (CoT) logic with parallel tool execution.",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
